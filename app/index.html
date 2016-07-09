@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>MiniWorldZ</title>
+		
+		<link rel="stylesheet" type="text/css" href="styles/material-elements.css" />
+		<link rel="stylesheet" type="text/css" href="styles/material-depth.css" />
+		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
+		
+		<script type="text/javascript" src="scripts/env.js"></script>
+		<script type="text/javascript" src="scripts/editor.js"></script>
+		<script type="text/javascript" src="scripts/console.js"></script>
+		<script type="text/javascript" src="scripts/mw.js"></script>
+		<script type="text/javascript" src="scripts/turtle.js"></script>
+		<script type="text/javascript">
+			window.addEventListener('load', function () {
+				__env.init();
+				__editor.console.init();
+			}, false);
+		</script>
+	</head>
+	<body>
+		<div role="toolbar" class="leftBar z1">
+		
+		</div>
+		<div class="bottomBar z1">
+			<div class="tabs">
+				<button onclick="__editor.switchBottomTab('console');"></button>
+				<button onclick="__editor.switchBottomTab('shapes');"></button>
+				<button onclick="__editor.switchBottomTab('paint');"></button>
+			</div>
+			<div id="__bottomContent">
+				<div id="__consoleContent">
+					<div id="__consoleOutput"></div>
+					<form onsubmit="__editor.console.execute(this, event);">
+						<input type="text" name="__consoleInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+						<button type="submit">Run</button>
+					</form>
+				</div>
+				<div id="__shapesContent"></div>
+				<div id="__paintContent"></div>
+			</div>
+		</div>
+		<canvas id="__bgCanvas" width="744" height="426"></canvas>
+		<canvas id="__preCanvas" width="744" height="426"></canvas>
+		<canvas id="__turtleCanvas" width="744" height="426"></canvas>
+		<div id="__interact"></div>
+		<div id="__editor"></div>
+	</body>
+</html>

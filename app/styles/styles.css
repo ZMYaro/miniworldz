@@ -1,0 +1,77 @@
+@import 'https://fonts.googleapis.com/css?family=Roboto+Mono';
+
+body {
+	background-color: #e5e5e5;
+	padding: 8px 8px 256px 64px;
+	margin: 0;
+	border: 0 none;
+}
+
+
+.leftBar {
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 64px;
+	z-index: 2;
+}
+
+.bottomBar {
+	position: fixed;
+	left: 64px;
+	right: 0;
+	bottom: 0;
+	height: 256px;
+	z-index: 1;
+	
+	background-color: white;
+}
+	.bottomBar.tabs {
+		position: absolute;
+		left: 0;
+		top:0;
+		bottom: 0;
+		width: 96px;
+	}
+	#__bottomContent {
+		position: absolute;
+		left: 96px;
+		top: 0;
+		bottom: 0;
+		right: 0;
+	}
+		#__consoleOutput {
+			font-family: 'Roboto Mono';
+			height: 212px;
+			overflow: auto;
+			overflow-y: scroll;
+		}
+			#__consoleOutput p {
+				margin: 0;
+			}
+				#__consoleOutput p.error {
+					color: #ff5722;
+				}
+				#__consoleOutput p.history {
+					color: #607d8b;
+				}
+		#__consoleContent input {
+			font-family: 'Roboto Mono';
+			margin-left: 4px;
+			width: 80%;
+			width: calc(100% - 82px);
+		}
+
+#__bgCanvas,
+#__preCanvas,
+#__turtleCanvas,
+#__interact,
+#__editor {
+	position: absolute;
+	left: 72px;
+	top: 8px;
+	width: 744px;
+	height: 426px;
+	background-color: white;
+}
