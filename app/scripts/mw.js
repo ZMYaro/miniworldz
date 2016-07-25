@@ -243,9 +243,9 @@ var MW = (function () {
 			if (!_validateArgCount('clone', 1, arguments.length)) {
 				return;
 			}
-			var newTurtle = __env.addTurtle();
-			newTurtle._color = turtle._color;
-			newTurtle._shape = turtle._shape;
+			var newTurtle = __env.createTurtle();
+			newTurtle.color = turtle.color;
+			newTurtle.shape = turtle.shape;
 		},
 		
 		
