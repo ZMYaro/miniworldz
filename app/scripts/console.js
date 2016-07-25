@@ -38,6 +38,7 @@ __editor.console = {
 		event.preventDefault();
 		event.stopPropagation();
 		this.addHistory(consoleForm.__consoleInput.value);
+		this._historyIndex = 0;
 		__env.sandbox.runCode(consoleForm.__consoleInput.value);
 		consoleForm.__consoleInput.value = '';
 	},
