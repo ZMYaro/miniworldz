@@ -73,21 +73,26 @@ var Turtle = (function () {
 		
 		/**
 		 * Move the turtle backward.
+		 * @param {Number} distance
 		 * @example
 		 * t1.back(20);
 		 */
-		back: function (number) {
-			// TODO
+		back: function (distance) {
+			if (!_clampValue('back', distance)) {
+				return;
+			}
+			this.xCor += -distance * Math.sin(this._heading);
+			this.yCor += distance * Math.cos(this._heading);
 		},
 		
 		/**
 		 * Shorthand for {@link back}.
-		 * @param {Number} number
+		 * @param {Number} distance
 		 * @example
 		 * t1.bk(20);
 		 */
-		bk: function (number) {
-			this.back(number);
+		bk: function (distance) {
+			this.back(distance);
 		},
 		
 		/**
@@ -102,6 +107,30 @@ var Turtle = (function () {
 		 */
 		clickOn: function () {
 			// TODO
+		},
+		
+		/**
+		 * Shorthand for {@link forward}.
+		 * @param {Number} distance
+		 * @example
+		 * t1.fd(20)
+		 */
+		fd: function (distance) {
+			this.forward(distance);
+		},
+		
+		/**
+		 * Move the turtle forward.
+		 * @param {Number} distance
+		 * @example
+		 * t1.forward(20)
+		 */
+		forward: function (distance) {
+			if (!_clampValue('forward', distance)) {
+				return;
+			}
+			this.xCor += distance * Math.sin(this._heading);
+			this.yCor += -distance * Math.cos(this._heading);
 		},
 		
 		get color() {
