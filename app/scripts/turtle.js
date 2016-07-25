@@ -54,8 +54,9 @@ var Turtle = (function () {
 	Turtle.prototype = {
 		__draw: function (ctx) {
 			ctx.save();
-			ctx.translate(this.xCor + (this._shapeCanvas.width / 2), this.yCor + (this._shapeCanvas.height / 2));
+			ctx.translate(this.xCor, this.yCor);
 			ctx.rotate(this._heading);
+			ctx.translate(-0.5 * this._shapeCanvas.width, -0.5 * this._shapeCanvas.height);
 			ctx.drawImage(this._shapeCanvas, 0, 0);
 			ctx.restore();
 		},
