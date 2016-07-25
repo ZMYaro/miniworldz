@@ -2,13 +2,13 @@ var Turtle = (function () {
 	'use strict';
 	
 	function _throwTypeError(func, input) {
-		throw new TypeError(func + ' does not like ' + input + ' as input.');
+		throw new TypeError(func + ' does not like ' + input + ' as input');
 	}
 	function _throwMaxError(func) {
-		throw new RangeError('The maximum value for ' + func + ' is 9999.');
+		throw new RangeError('The maximum value for ' + func + ' is 9999');
 	}
 	function _throwMinError(func) {
-		throw new RangeError('The minimum value for ' + func + ' is -9999.');
+		throw new RangeError('The minimum value for ' + func + ' is -9999');
 	}
 	function _clampValue(func, input, min, max) {
 		if (typeof input !== 'number') {

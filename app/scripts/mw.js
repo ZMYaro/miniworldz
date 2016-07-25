@@ -2,11 +2,11 @@ var MW = (function () {
 	var _bgColor = 0;
 	
 	function _throwTypeError(func, input) {
-		throw new TypeError(func + ' does not like ' + input + ' as input.');
+		throw new TypeError(func + ' does not like ' + input + ' as input');
 	}
 	function _validateArgCount(func, expected, received) {
 		if (expected !== received) {
-			throw new Error(func + ' expected ' + expected + ' input' + (expected === 1 ? '' : 's') + ' but received ' + received + '.');
+			throw new Error(func + ' expected ' + expected + ' input' + (expected === 1 ? '' : 's') + ' but received ' + received);
 			return false;
 		}
 		return true;
