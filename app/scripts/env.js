@@ -29,11 +29,23 @@ var __env = {
 	init: function (pageData) {
 		this.shapes[0].image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeAQMAAAAW3KwoAAAABlBMVEUAAAAAAAClZ7nPAAAAAXRSTlMAQObYZgAAAEJJREFUCNdjYEhgYGD4wMDA+AOGQXwIfvijgOH7vw8M9f8fMNj/P8Ag/78BhMFsBEaI8/9ngMtX/nzAUJDwgAEHAAAhMybCgj+n6wAAAABJRU5ErkJggg==';
 		
+		this.bgCanvas = document.getElementById('__bgCanvas');
+		this.bgCtx = this.bgCanvas.getContext('2d');
+		this.preCanvas = document.getElementById('__preCanvas');
+		this.preCtx = this.preCanvas.getContext('2d');
+		this.turtleCanvas = document.getElementById('__turtleCanvas');
+		this.turtleCtx = this.turtleCanvas.getContext('2d');
+		
 		if (!pageData) {
 			this.pages = [this.createPage()];
 		} else {
 			this.pages = pageData;
 		}
+		
+		// Get background image.
+		this.bgImage = new Image();
+		this.bgImage.src = this.pages[0].bg;
+		this.bgCtx.drawImage(this.bgImage, 0, 0);
 		
 		// Create the turtles for each page.
 		for (var i = 0; i < this.pages.length; i++) {
@@ -48,13 +60,6 @@ var __env = {
 			}
 		}
 		
-		this.bgCanvas = document.getElementById('__bgCanvas');
-		this.bgCtx = this.bgCanvas.getContext('2d');
-		this.preCanvas = document.getElementById('__preCanvas');
-		this.preCtx = this.preCanvas.getContext('2d');
-		this.turtleCanvas = document.getElementById('__turtleCanvas');
-		this.turtleCtx = this.turtleCanvas.getContext('2d');
-		
 		this.update = this.update.bind(this);
 		requestAnimationFrame(this.update);
 	},
@@ -68,7 +73,7 @@ var __env = {
 			buttons: [],
 			textBoxes: {},
 			sliders: {},
-			bg: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAAGqCAYAAABZIrFqAAAZm0lEQ…ABAgQMdD9AgAABAgQIECBAICRgoIfKEIUAAQIECBAgQIDAA6BJo13/TJ7nAAAAAElFTkSuQmCC'
+			bg: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAAGqAQMAAABj7CMpAAAAA1BMVEX///+nxBvIAAAAPUlEQVR42u3BMQEAAADCIPuntsNuYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQHKcbAABaYlmjAAAAABJRU5ErkJggg=='
 		};
 	},
 	
