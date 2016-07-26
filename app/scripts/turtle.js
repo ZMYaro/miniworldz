@@ -82,8 +82,7 @@ var Turtle = (function () {
 			if (!_clampValue('back', distance)) {
 				return;
 			}
-			this.xCor += -distance * Math.sin(this._heading);
-			this.yCor += distance * Math.cos(this._heading);
+			this.forward(-distance);
 		},
 		
 		/**
