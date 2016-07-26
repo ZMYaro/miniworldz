@@ -1,43 +1,13 @@
 var Turtle = (function () {
 	'use strict';
 	
-	function _throwTypeError(func, input) {
-		throw new TypeError(func + ' does not like ' + input + ' as input');
-	}
-	function _throwMaxError(func) {
-		throw new RangeError('The maximum value for ' + func + ' is 9999');
-	}
-	function _throwMinError(func) {
-		throw new RangeError('The minimum value for ' + func + ' is -9999');
-	}
-	function _clampValue(func, input, min, max) {
-		if (typeof input !== 'number') {
-			_throwTypeError(func, input);
-			return false;
-		}
-		if (typeof min === 'undefined') {
-			min = -9999;
-		}
-		if (typeof max === 'undefined') {
-			max = 9999;
-		}
-		if (input < min) {
-			_throwMinError(func);
-			return false;
-		} else if (input > max) {
-			_throwMaxError(func);
-			return false;
-		}
-		return true;
-	}
-	
 	/**
 	 * Create a new Turtle.
 	 * @param {Number} xCor
 	 * @param {Number} yCor
 	 */
 	function Turtle(xCor, yCor) {
-		if (!_clampValue('Turtle', xCor) || !_clampValue('Turtle', yCor)) {
+		if (!__env.err.clampValue('Turtle', xCor) || !__env.err.clampValue('Turtle', yCor)) {
 			return;
 		}
 		
@@ -45,6 +15,8 @@ var Turtle = (function () {
 		this.yCor = yCor;
 		this._heading = 0;
 		this._color = 9;
+		this._penDown = false;
+		this._penSize = 1;
 		this._shape = 0;
 		this._shapeCanvas = document.createElement('canvas');
 		this._shapeCtx = this._shapeCanvas.getContext('2d');
@@ -79,9 +51,10 @@ var Turtle = (function () {
 		 * t1.back(20);
 		 */
 		back: function (distance) {
-			if (!_clampValue('back', distance)) {
+			if (!__env.err.validateSingleNumber('back', arguments)) {
 				return;
 			}
+			
 			this.forward(-distance);
 		},
 		
@@ -92,7 +65,11 @@ var Turtle = (function () {
 		 * t1.bk(20);
 		 */
 		bk: function (distance) {
-			this.back(distance);
+			if (!__env.err.validateSingleNumber('bk', arguments)) {
+				return;
+			}
+			
+			this.forward(-distance);
 		},
 		
 		/**
@@ -116,6 +93,10 @@ var Turtle = (function () {
 		 * t1.fd(20)
 		 */
 		fd: function (distance) {
+			if (!__env.err.validateSingleNumber('fd', arguments)) {
+				return;
+			}
+			
 			this.forward(distance);
 		},
 		
@@ -126,9 +107,10 @@ var Turtle = (function () {
 		 * t1.forward(20)
 		 */
 		forward: function (distance) {
-			if (!_clampValue('forward', distance)) {
+			if (!__env.err.validateSingleNumber('forward', arguments)) {
 				return;
 			}
+			
 			this.xCor += distance * Math.sin(this._heading);
 			this.yCor += -distance * Math.cos(this._heading);
 		},
@@ -137,9 +119,12 @@ var Turtle = (function () {
 			return this._color;
 		},
 		set color(color) {
+			if (!__env.err.validateArgCount('color', 1, arguments.length)) {
+				return;
+			}
 			if ((typeof color !== 'number' && typeof color !== 'string') ||
 					typeof __env.COLORS[color] === 'undefined') {
-				_throwTypeError('color', color);
+				__env.err.throwTypeError('color', color);
 				return;
 			}
 			this._color = color;
@@ -153,9 +138,10 @@ var Turtle = (function () {
 			return this._heading * 180 / Math.PI;
 		},
 		set heading(heading) {
-			if (!_clampValue('heading', heading)) {
+			if (!__env.err.validateSingleNumber('heading', arguments)) {
 				return;
 			}
+			
 			this._heading = heading * Math.PI / 180;
 		},
 		
@@ -163,10 +149,10 @@ var Turtle = (function () {
 			return this._shape;
 		},
 		set shape(shape) {
-			if (typeof shape !== 'number' || typeof __env.shapes[shape] === 'undefined') {
-				_throwTypeError('shape', shape);
+			if (!__env.err.validateSingleNumber('shape', arguments, 0, 128)) {
 				return;
 			}
+			
 			// Save the new shape number.
 			this._shape = shape;
 			

@@ -1,17 +1,6 @@
 var MW = (function () {
 	var _bgColor = 0;
 	
-	function _throwTypeError(func, input) {
-		throw new TypeError(func + ' does not like ' + input + ' as input');
-	}
-	function _validateArgCount(func, expected, received) {
-		if (expected !== received) {
-			throw new Error(func + ' expected ' + expected + ' input' + (expected === 1 ? '' : 's') + ' but received ' + received);
-			return false;
-		}
-		return true;
-	}
-	
 	var MW = {
 		/**
 		 * Stands for absolute.  Reports the absolute value of its input.
@@ -21,11 +10,11 @@ var MW = (function () {
 		 * 33
 		 */
 		abs: function (number) {
-			if (!_validateArgCount('abs', 1, arguments.length)) {
+			if (!__env.err.validateArgCount('abs', arguments.length, 1)) {
 				return;
 			}
 			if (typeof number !== 'number') {
-				_throwTypeError('abs', number);
+				__env.err.throwTypeError('abs', number);
 				return;
 			}
 			return Math.abs(number);
@@ -38,7 +27,7 @@ var MW = (function () {
 		 * alert('You win!!');
 		 */
 		alert: function (message) {
-			if (!_validateArgCount('alert', 1, arguments.length)) {
+			if (!__env.err.validateArgCount('alert', arguments.length, 1)) {
 				return;
 			}
 			window.alert(message);
@@ -60,11 +49,11 @@ var MW = (function () {
 		 * 45
 		java */
 		arctan: function (number) {
-			if (!_validateArgCount('arctan', 1, arguments.length)) {
+			if (!__env.err.validateArgCount('arctan', arguments.length, 1)) {
 				return;
 			}
 			if (typeof number !== 'number') {
-				_throwTypeError('arctan', number);
+				__env.err.throwTypeError('arctan', number);
 				return;
 			}
 			var radVal = Math.atan(number);
@@ -76,11 +65,11 @@ var MW = (function () {
 		 * @param {String} character
 		 */
 		ascii: function (character) {
-			if (!_validateArgCount('ascii', 1, arguments.length)) {
+			if (!__env.err.validateArgCount('ascii', arguments.length, 1)) {
 				return;
 			}
 			if (typeof character !== 'string') {
-				_throwTypeError('ascii', character);
+				__env.err.throwTypeError('ascii', character);
 				return;
 			}
 			return character.charCodeAt(0);
@@ -121,7 +110,7 @@ var MW = (function () {
 		 * elcome
 		 */
 		butFirst: function (stringOrList) {
-			if (!_validateArgCount('butFirst', 1, arguments.length)) {
+			if (!__env.err.validateArgCount('butFirst', arguments.length, 1)) {
 				return;
 			}
 			if (Array.isArray(stringOrList)) {
@@ -129,7 +118,7 @@ var MW = (function () {
 			} else if (typeof stringOrList !== 'string') {
 				return stringOrList.substring(1);
 			} else {
-				_throwTypeError('butFirst', stringOrList);
+				__env.err.throwTypeError('butFirst', stringOrList);
 				return;
 			}
 		},
@@ -144,7 +133,7 @@ var MW = (function () {
 		 * welcom
 		 */
 		butLast: function (stringOrList) {
-			if (!_validateArgCount('butLast', 1, arguments.length)) {
+			if (!__env.err.validateArgCount('butLast', arguments.length, 1)) {
 				return;
 			}
 			if (Array.isArray(stringOrList)) {
@@ -152,7 +141,7 @@ var MW = (function () {
 			} else if (typeof stringOrList !== 'string') {
 				return stringOrList.substring(0, stringOrList.length - 1);
 			} else {
-				_throwTypeError('butLast', stringOrList);
+				__env.err.throwTypeError('butLast', stringOrList);
 				return;
 			}
 		},
@@ -169,7 +158,7 @@ var MW = (function () {
 		 * Stands for clear the command center.  Clears text in the command center.
 		 */
 		cc: function () {
-			if (!_validateArgCount('cc', 0, arguments.length)) {
+			if (!__env.err.validateArgCount('cc', arguments.length, 0)) {
 				return;
 			}
 			window.__editor.console.clear();
@@ -180,7 +169,7 @@ var MW = (function () {
 		 * Stands for clear graphics.  Clears the graphics on the page and returns the current turtle to its home position, facing up.  See also {@link clean}.
 		 */
 		cg: function () {
-			if (!_validateArgCount('cg', 0, arguments.length)) {
+			if (!__env.err.validateArgCount('cg', arguments.length, 0)) {
 				return;
 			}
 			// TODO
@@ -194,11 +183,11 @@ var MW = (function () {
 		 * a
 		 */
 		char: function (input) {
-			if (!_validateArgCount('char', 1, arguments.length)) {
+			if (!__env.err.validateArgCount('char', arguments.length, 1)) {
 				return;
 			}
 			if (typeof input !== 'number') {
-				_throwTypeError('char', input);
+				__env.err.throwTypeError('char', input);
 			} else if (input < 32 && input !== 9) {
 				window.__editor.console.error('The minimum value for char is 32.')
 			} else if (input > 255) {
@@ -215,7 +204,7 @@ var MW = (function () {
 		 * Clears the graphics without changing any turtle's position.  See also {@link cg} and {@link freezebg}.
 		 */
 		clean: function () {
-			if (!_validateArgCount('clean', 1, arguments.length)) {
+			if (!__env.err.validateArgCount('clean', arguments.length, 0)) {
 				return;
 			}
 			// TODO
@@ -240,7 +229,7 @@ var MW = (function () {
 		 * clone('t1');
 		 */
 		clone: function (turtle) {
-			if (!_validateArgCount('clone', 1, arguments.length)) {
+			if (!__env.err.validateArgCount('clone', arguments.length, 1)) {
 				return;
 			}
 			var newTurtle = __env.createTurtle();
@@ -259,7 +248,7 @@ var MW = (function () {
 		 * 1,2,3
 		 */
 		show: function (stringOrList, isError) {
-			if ((!isError || typeof isError !== 'boolean') && !_validateArgCount('show', 1, arguments.length)) {
+			if ((!isError || typeof isError !== 'boolean') && !__env.err.validateArgCount('show', arguments.length, 1)) {
 				return;
 			}
 			if (!isError) {
