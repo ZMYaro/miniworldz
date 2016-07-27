@@ -42,14 +42,15 @@ __env.err = {
 	
 	validateSingleNumber: function (func, args, min, max) {
 		if (!this.validateArgCount(func, args.length, 1)) {
-			return;
+			return false;
 		}
 		if (typeof args[0] !== 'number') {
 			this.throwTypeError(func, args[0]);
-			return;
+			return false;
 		}
-		if (!this.clampValue(func, args[0], min, max)) {
-			return;
+		if (typeof min !== 'undefined' && typeof max !== 'undefined') {
+			return this.clampValue(func, args[0], min, max);
 		}
+		return true;
 	}
 };

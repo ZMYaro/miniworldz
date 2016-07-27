@@ -10,13 +10,10 @@ var MW = (function () {
 		 * 33
 		 */
 		abs: function (number) {
-			if (!__env.err.validateArgCount('abs', arguments.length, 1)) {
+			if (!__env.err.validateSingleNumber('abs', arguments)) {
 				return;
 			}
-			if (typeof number !== 'number') {
-				__env.err.throwTypeError('abs', number);
-				return;
-			}
+			
 			return Math.abs(number);
 		},
 
@@ -30,6 +27,7 @@ var MW = (function () {
 			if (!__env.err.validateArgCount('alert', arguments.length, 1)) {
 				return;
 			}
+			
 			window.alert(message);
 		},
 		
@@ -49,13 +47,10 @@ var MW = (function () {
 		 * 45
 		java */
 		arctan: function (number) {
-			if (!__env.err.validateArgCount('arctan', arguments.length, 1)) {
+			if (!__env.err.validateSingleNumber('arctan', arguments)) {
 				return;
 			}
-			if (typeof number !== 'number') {
-				__env.err.throwTypeError('arctan', number);
-				return;
-			}
+			
 			var radVal = Math.atan(number);
 			return radVal / Math.PI * 180;
 		},
@@ -72,6 +67,7 @@ var MW = (function () {
 				__env.err.throwTypeError('ascii', character);
 				return;
 			}
+			
 			return character.charCodeAt(0);
 		},
 
@@ -183,16 +179,10 @@ var MW = (function () {
 		 * a
 		 */
 		char: function (input) {
-			if (!__env.err.validateArgCount('char', arguments.length, 1)) {
+			if (!__env.err.validateSingleNumber('char', arguments, 32, 255)) {
 				return;
 			}
-			if (typeof input !== 'number') {
-				__env.err.throwTypeError('char', input);
-			} else if (input < 32 && input !== 9) {
-				window.__editor.console.error('The minimum value for char is 32.')
-			} else if (input > 255) {
-				window.__editor.console.error('The maximum value for char is 255.');
-			}
+			
 			return String.fromCharCode(input);
 		},
 		
@@ -232,6 +222,11 @@ var MW = (function () {
 			if (!__env.err.validateArgCount('clone', arguments.length, 1)) {
 				return;
 			}
+			if (!(turtle instanceof Turtle)) {
+				__env.err.throwTypeError('clone', turtle);
+				return;
+			}
+			
 			var newTurtle = __env.createTurtle();
 			newTurtle.color = turtle.color;
 			newTurtle.shape = turtle.shape;

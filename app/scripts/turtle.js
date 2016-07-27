@@ -51,7 +51,7 @@ var Turtle = (function () {
 		 * t1.back(20);
 		 */
 		back: function (distance) {
-			if (!__env.err.validateSingleNumber('back', arguments)) {
+			if (!__env.err.validateSingleNumber('back', arguments, -9999, 9999)) {
 				return;
 			}
 			
@@ -65,7 +65,7 @@ var Turtle = (function () {
 		 * t1.bk(20);
 		 */
 		bk: function (distance) {
-			if (!__env.err.validateSingleNumber('bk', arguments)) {
+			if (!__env.err.validateSingleNumber('bk', arguments, -9999, 9999)) {
 				return;
 			}
 			
@@ -90,10 +90,10 @@ var Turtle = (function () {
 		 * Shorthand for {@link forward}.
 		 * @param {Number} distance
 		 * @example
-		 * t1.fd(20)
+		 * t1.fd(20);
 		 */
 		fd: function (distance) {
-			if (!__env.err.validateSingleNumber('fd', arguments)) {
+			if (!__env.err.validateSingleNumber('fd', arguments, -9999, 9999)) {
 				return;
 			}
 			
@@ -104,10 +104,10 @@ var Turtle = (function () {
 		 * Move the turtle forward.
 		 * @param {Number} distance
 		 * @example
-		 * t1.forward(20)
+		 * t1.forward(20);
 		 */
 		forward: function (distance) {
-			if (!__env.err.validateSingleNumber('forward', arguments)) {
+			if (!__env.err.validateSingleNumber('forward', arguments, -9999, 9999)) {
 				return;
 			}
 			
@@ -138,7 +138,7 @@ var Turtle = (function () {
 			return this._heading * 180 / Math.PI;
 		},
 		set heading(heading) {
-			if (!__env.err.validateSingleNumber('heading', arguments)) {
+			if (!__env.err.validateSingleNumber('heading', arguments, -9999, 9999)) {
 				return;
 			}
 			
