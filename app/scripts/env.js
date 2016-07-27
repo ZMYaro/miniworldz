@@ -87,14 +87,22 @@ var __env = {
 		}
 		var newTurtle = new Turtle(x || 0, y || 0);
 		window[name] = newTurtle;
-		__env.pages[this.currentPage].turtles[name] = newTurtle;
+		this.pages[this.currentPage].turtles[name] = newTurtle;
 		return newTurtle;
 	},
 	
 	update: function () {
+		// Run loops.
+		for (var i = 0; i < this.loops.length; i++) {
+			this.loops[i].func();
+			if (this.loops[i].times !== -1 && --this.loops[i].times === 0) {
+				this.loops.splice(i, 1);
+				i--;
+			}
+		}
 		
 		// Draw turtles.
-		__env.turtleCtx.clearRect(0, 0, this.turtleCanvas.width, this.turtleCanvas.height);
+		this.turtleCtx.clearRect(0, 0, this.turtleCanvas.width, this.turtleCanvas.height);
 		for (var turtleName in this.pages[this.currentPage].turtles) {
 			this.pages[this.currentPage].turtles[turtleName].__draw(this.turtleCtx);
 		}

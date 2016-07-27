@@ -142,9 +142,22 @@ var MW = (function () {
 			}
 		},
 		
-		//
-		// TODO: cancel
-		//
+		/**
+		 * Stops the function given as input.  The function must have been launched using {@link forever}, buttons, or clickable turtles.  The input must be the exact same as the function that started the process.
+		 * @input {Function} func
+		 * @example
+		 * forever(myFunc);
+		 * wait(200);
+		 * cancel(myFunc);
+		 */
+		cancel: function (func) {
+			__env.loops.forEach((loop, i) => {
+				if (loop.func.toString() == func.toString()) {
+					// Remove the function from the loop list.
+					__env.loops.splice(i, 1);
+				}
+			});
+		},
 		
 		//
 		// TODO: carefully
@@ -265,6 +278,19 @@ var MW = (function () {
 		//
 		
 		
+		
+		/**
+		 * Runs the function repeatedly.  Use {@link cancel} or the Stop All toolbar button to stop it.
+		 * @param {Function} func
+		 * @example
+		 * forever(() => { t1.fd(1); t1.rt(2); });
+		 */
+		forever: function (func) {
+			__env.loops.push({
+				func: func,
+				times: -1
+			});
+		},
 		
 		/**
 		 * Prints a word or list in the command center.
