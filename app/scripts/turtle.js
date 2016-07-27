@@ -115,6 +115,62 @@ var Turtle = (function () {
 			this.yCor += -distance * Math.cos(this._heading);
 		},
 		
+		/**
+		 * Turn the turtle to the left a number of degrees.
+		 * @param {Number} degrees
+		 * @example
+		 * t1.left(90);
+		 */
+		left: function (degrees) {
+			if (!__env.err.validateSingleNumber('left', arguments, -9999, 9999)) {
+				return;
+			}
+			
+			this._heading += (degrees * Math.PI / 180);
+		},
+		
+		/**
+		 * Shorthand for {@link left}
+		 * @param {Number} degrees
+		 * @example
+		 * t1.lt(90);
+		 */
+		lt: function (degrees) {
+			if (!__env.err.validateSingleNumber('lt', arguments, -9999, 9999)) {
+				return;
+			}
+			
+			this.left(degrees);
+		},
+		
+		/**
+		 * Turn the turtle to the right a number of degrees.
+		 * @param {Number} degrees
+		 * @example
+		 * t1.right(90);
+		 */
+		right: function (degrees) {
+			if (!__env.err.validateSingleNumber('right', arguments, -9999, 9999)) {
+				return;
+			}
+			
+			this.left(-degrees);
+		},
+		
+		/**
+		 * Shorthand for {@link right}
+		 * @param {Number} degrees
+		 * @example
+		 * t1.rt(90);
+		 */
+		rt: function (degrees) {
+			if (!__env.err.validateSingleNumber('rt', arguments, -9999, 9999)) {
+				return;
+			}
+			
+			this.left(-degrees);
+		},
+		
 		get color() {
 			return this._color;
 		},
