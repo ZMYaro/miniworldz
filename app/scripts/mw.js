@@ -232,6 +232,39 @@ var MW = (function () {
 			newTurtle.shape = turtle.shape;
 		},
 		
+		//
+		// TODO: colorunder
+		//
+		
+		//
+		// TODO: copy
+		//
+		
+		/**
+		 * Stands for cosine.  Reports the cosine of its input.
+		 * @param {Number} degrees
+		 * @example
+		 * show(cos(180));
+		 * -1
+		 */
+		cos: function (degrees) {
+			if (!__env.err.validateSingleNumber('cos', arguments)) {
+				return;
+			}
+			
+			var radVal = degrees * Math.PI / 180;
+			return Math.cos(degrees);
+		},
+		
+		//
+		// Not implementing `count`.  Use `wordOrList.length` instead.
+		//
+		
+		//
+		// TODO: cut
+		//
+		
+		
 		
 		/**
 		 * Prints a word or list in the command center.

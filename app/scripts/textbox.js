@@ -46,6 +46,13 @@ var TextBox = (function () {
 		}
 	};
 	
+	/**
+	 * Stands for cursor up.  Moves the cursor (insertion point) to the previous physical line.  See also {@link cd}, {@link cb}, and {@link cf}.
+	 */
+	TextBox.prototype.cu = function () {
+		// TODO
+	};
+	
 	Object.freeze(TextBox);
 	return TextBox;
 });
