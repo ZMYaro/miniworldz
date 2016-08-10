@@ -1,4 +1,7 @@
 __env.err = {
+	throwDeprecationError: function (oldFunc, newFunc) {
+		throw new Error('Use \u201c' + newFunc + '\u201d instead of \u201c' + oldFunc + '\u201d.');
+	},
 	throwTypeError: function (func, input) {
 		throw new TypeError(func + ' does not like ' + input + ' as input');
 	},

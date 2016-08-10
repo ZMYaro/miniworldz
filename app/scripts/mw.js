@@ -31,9 +31,19 @@ var MW = (function () {
 			window.alert(message);
 		},
 		
-		//
-		// Not implementing `and`.  Use JavaScript `&&` in boolean expressions.
-		//
+		/**
+		 * @deprecated function from MicroWorlds Logo.
+		 */
+		and: function () {
+			__env.err.throwDeprecationError('and(condition1, condition2)', 'condition1 && condition2');
+		},
+		
+		/**
+		 * @deprecated function from MicroWorlds Logo.
+		 */
+		announce: function () {
+			__env.err.throwDeprecationError('announce(message)', 'alert(message)');
+		},
 		
 		//
 		// TODO: answer
@@ -214,7 +224,7 @@ var MW = (function () {
 		},
 		
 		// 
-		// Not implementing `clearname`.  Use `delete` instead.
+		// TODO: clearname (not like `delete`, which only works on objects)
 		//
 		
 		// 
@@ -269,9 +279,12 @@ var MW = (function () {
 			return Math.cos(degrees);
 		},
 		
-		//
-		// Not implementing `count`.  Use `wordOrList.length` instead.
-		//
+		/**
+		 * @deprecated function from MicroWorlds Logo.
+		 */
+		count: function () {
+			__env.err.throwDeprecationError('count(wordOrList)', 'wordOrList.length');
+		},
 		
 		//
 		// TODO: cut
