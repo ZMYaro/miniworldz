@@ -27,10 +27,21 @@ var Turtle = (function () {
 		__draw: function (ctx) {
 			ctx.save();
 			ctx.translate(this.xCor + (ctx.canvas.width / 2), this.yCor + (ctx.canvas.height / 2));
-			ctx.rotate(this._heading);
+			ctx.rotate(-this._heading);
 			ctx.translate(-0.5 * this._shapeCanvas.width, -0.5 * this._shapeCanvas.height);
 			ctx.drawImage(this._shapeCanvas, 0, 0);
 			ctx.restore();
+		},
+		
+		/**
+		 * @private
+		 */
+		_clampHeading: function () {
+			if (this._heading > 0) {
+				this._heading -= Math.TAU;
+			} else if (this._heading < -Math.TAU) {
+				this._heading += Math.TAU;
+			}
 		},
 		
 		/**
@@ -111,7 +122,7 @@ var Turtle = (function () {
 				return;
 			}
 			
-			this.xCor += distance * Math.sin(this._heading);
+			this.xCor += -distance * Math.sin(this._heading);
 			this.yCor += -distance * Math.cos(this._heading);
 		},
 		
@@ -127,6 +138,7 @@ var Turtle = (function () {
 			}
 			
 			this._heading += (degrees * Math.PI / 180);
+			this._clampHeading();
 		},
 		
 		/**
@@ -191,14 +203,15 @@ var Turtle = (function () {
 		},
 		
 		get heading() {
-			return this._heading * 180 / Math.PI;
+			return -this._heading * 180 / Math.PI;
 		},
 		set heading(heading) {
 			if (!__env.err.validateSingleNumber('heading', arguments, -9999, 9999)) {
 				return;
 			}
 			
-			this._heading = heading * Math.PI / 180;
+			this._heading = -heading * Math.PI / 180;
+			this._clampHeading();
 		},
 		
 		get shape() {
