@@ -32,8 +32,8 @@ var __editor = {
 		return true;
 	},
 	
-	addTurtle: function (x, y) {
-		__env.addTurtle(x, y);
+	createTurtle: function (x, y) {
+		__env.createTurtle(x, y);
 	},
 	
 	renameTurtle: function (oldName, newName) {
