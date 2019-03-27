@@ -36,12 +36,27 @@ var __editor = {
 		__env.createTurtle(x, y);
 	},
 	
+	/**
+	 * Rename a turtle on the current page.
+	 * @param {String} oldName - The current name of the turtle being renamed
+	 * @param {String} newName - The new name to give the turtle
+	 */
 	renameTurtle: function (oldName, newName) {
-		if (!validateName(newName)) {
+		// If no turtle exists with the old name, silently abort.
+		if (typeof(__env.pages[__env.currentPage].turtles[oldName]) === 'undefined') {
 			return;
 		}
-		window[newName] = window[oldName];
-		window[oldName] = undefined;
+		
+		// If the new name is not valid for some reason, abort after validateName shows the appropriate error message.
+		if (!this.validateName(newName)) {
+			return;
+		}
+		
+		var turtle = __env.pages[__env.currentPage].turtles[oldName];
+		__env.pages[__env.currentPage].turtles[newName] = turtle;
+		window[newName] = turtle;
+		delete __env.pages[__env.currentPage].turtles[oldName];
+		delete window[oldName];
 	},
 	
 	switchBottomTab: function (newTab) {
