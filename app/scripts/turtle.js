@@ -191,14 +191,14 @@ var Turtle = (function () {
 		},
 		
 		get heading() {
-			return this._heading * 180 / Math.PI;
+			return -this._heading * 180 / Math.PI;
 		},
 		set heading(heading) {
 			if (!__env.err.validateSingleNumber('heading', arguments, -9999, 9999)) {
 				return;
 			}
 			
-			this._heading = heading * Math.PI / 180;
+			this._heading = -heading * Math.PI / 180;
 		},
 		
 		get shape() {
