@@ -47,28 +47,28 @@ var __env = {
 		this.bgImage.src = this.pages[0].bg;
 		this.bgImage.onload = () => this.bgCtx.drawImage(this.bgImage, 0, 0);
 		
-		// Create the turtles for each page.
+		// Create the objects for each page.
 		for (var i = 0; i < this.pages.length; i++) {
+			this.currentPage = i;
 			for (var turtleName in this.pages[i].turtles) {
-				this.currentPage = i;
 				var turtleData = this.pages[i].turtles[turtleName];
-					turtle = this.createTurtle(turtleData.x, turtleData.y, turtleName);
-				turtle._color = turtleData._color;
-				turtle._shape = turtleData._shape;
+					turtle = this.createTurtle(turtleData.x, turtleData.y);
+				turtle.color = turtleData.color;
+				turtle.shape = turtleData.shape;
 				this.pages[i].turtles[turtleName] = turtle;
 				window[turtleName] = turtle;
 			}
 		}
 		
-		this.update = this.update.bind(this);
-		requestAnimationFrame(this.update);
+		this.boundUpdate = this.update.bind(this);
+		requestAnimationFrame(this.boundUpdate);
 	},
 	
 	createPage: function () {
 		return {
 			name: 'Page 1',
 			turtles: {
-				't1': new Turtle(0, 0)
+				't1': { x: 0, y: 0, color: 9, shape: 0 }
 			},
 			buttons: [],
 			textBoxes: {},
@@ -107,7 +107,7 @@ var __env = {
 			this.pages[this.currentPage].turtles[turtleName].__draw(this.turtleCtx);
 		}
 		
-		requestAnimationFrame(this.update);
+		requestAnimationFrame(this.boundUpdate);
 	},
 	
 	sandbox: {
