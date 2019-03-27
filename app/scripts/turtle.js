@@ -36,6 +36,17 @@ var Turtle = (function () {
 		/**
 		 * @private
 		 */
+		_clampHeading: function () {
+			if (this._heading > 0) {
+				this._heading -= Math.TAU;
+			} else if (this._heading < -Math.TAU) {
+				this._heading += Math.TAU;
+			}
+		},
+		
+		/**
+		 * @private
+		 */
 		_recolorTurtle: function () {
 			this._shapeCtx.save();
 			this._shapeCtx.fillStyle = __env.COLORS[this._color];
@@ -127,6 +138,7 @@ var Turtle = (function () {
 			}
 			
 			this._heading += (degrees * Math.PI / 180);
+			this._clampHeading();
 		},
 		
 		/**
@@ -199,6 +211,7 @@ var Turtle = (function () {
 			}
 			
 			this._heading = -heading * Math.PI / 180;
+			this._clampHeading();
 		},
 		
 		get shape() {
