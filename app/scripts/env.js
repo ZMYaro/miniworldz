@@ -45,7 +45,7 @@ var __env = {
 		// Get background image.
 		this.bgImage = new Image();
 		this.bgImage.src = this.pages[0].bg;
-		this.bgCtx.drawImage(this.bgImage, 0, 0);
+		this.bgImage.onload = () => this.bgCtx.drawImage(this.bgImage, 0, 0);
 		
 		// Create the turtles for each page.
 		for (var i = 0; i < this.pages.length; i++) {
