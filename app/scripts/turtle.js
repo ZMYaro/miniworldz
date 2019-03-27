@@ -27,7 +27,7 @@ var Turtle = (function () {
 		__draw: function (ctx) {
 			ctx.save();
 			ctx.translate(this.xCor + (ctx.canvas.width / 2), this.yCor + (ctx.canvas.height / 2));
-			ctx.rotate(this._heading);
+			ctx.rotate(-this._heading);
 			ctx.translate(-0.5 * this._shapeCanvas.width, -0.5 * this._shapeCanvas.height);
 			ctx.drawImage(this._shapeCanvas, 0, 0);
 			ctx.restore();
@@ -111,7 +111,7 @@ var Turtle = (function () {
 				return;
 			}
 			
-			this.xCor += distance * Math.sin(this._heading);
+			this.xCor += -distance * Math.sin(this._heading);
 			this.yCor += -distance * Math.cos(this._heading);
 		},
 		
