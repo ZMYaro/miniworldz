@@ -16,17 +16,22 @@ var __editor = {
 		window.alert('Names can only include letters, numbers, and underscores.');
 	},
 	
+	/**
+	 * Ensure a name for an object does not collide with an existing object or a reserved word.
+	 * @param {String} name - The name to validate
+	 * @returns {Boolean} Whether the name is valid
+	 */
 	validateName: function (name) {
 		var NAME_REGEX = /^[A-Za-z0-9_]+$/,
 			RESERVED = [
 'abstract', 'boolean', 'break', 'byte', 'case', 'catch', 'char', 'class', 'const', 'continue', 'debugger', 'default', 'delete', 'do', 'double', 'else', 'enum', 'export', 'extends', 'false', 'final', 'finally', 'float', 'for', 'function', 'goto', 'if', 'implements', 'import', 'in', 'instanceof', 'int', 'interface', 'let', 'long', 'native', 'new', 'null', 'package', 'private', 'protected', 'public', 'return', 'short', 'static', 'super', 'switch', 'synchronized', 'this', 'throw', 'throws', 'transient', 'true', 'try', 'typeof', 'var', 'void', 'volatile', 'while', 'with'];
 		
-		if (typeof window[name] !== 'undefined' || typeof MW[name] !== 'undefined' || RESERVED.indexOf(name) !== -1 || name.indexOf('__') === 0) {
-			alertUsedNameError(name);
+		if (typeof(window[name]) !== 'undefined' || typeof(MW[name]) !== 'undefined' || RESERVED.indexOf(name) !== -1 || name.indexOf('__') === 0) {
+			this.alertUsedNameError(name);
 			return false;
 		}
-		if (NAME_REGEX.test(name)) {
-			alertInvalidNameError();
+		if (!NAME_REGEX.test(name)) {
+			this.alertInvalidNameError();
 			return false;
 		}
 		return true;
