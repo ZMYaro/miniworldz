@@ -1,6 +1,13 @@
 var __editor = {
 	activeBottomTab: 'console',
 	
+	/**
+	 * Initialize the editor.
+	 */
+	init: function () {
+		this.console.init();
+	},
+	
 	alertUsedNameError: function (name) {
 		window.alert('The name ' + name + ' is already used or is a reserved word.');
 	},
