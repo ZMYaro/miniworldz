@@ -44,8 +44,8 @@ var __env = {
 		
 		// Get background image.
 		this.bgImage = new Image();
+		this.bgImage.addEventListener('load', () => this.bgCtx.drawImage(this.bgImage, 0, 0));
 		this.bgImage.src = this.pages[0].bg;
-		this.bgImage.onload = () => this.bgCtx.drawImage(this.bgImage, 0, 0);
 		
 		// Create the objects for each page.
 		for (var i = 0; i < this.pages.length; i++) {
@@ -53,8 +53,12 @@ var __env = {
 			for (var turtleName in this.pages[i].turtles) {
 				var turtleData = this.pages[i].turtles[turtleName];
 					turtle = this.createTurtle(turtleData.x, turtleData.y);
+				// Set the new turtle's color.
 				turtle.color = turtleData.color;
+				// Set the new turtle's shape, and add an event listener in case the browser has not loaded the shape's image.
 				turtle.shape = turtleData.shape;
+				this.shapes[turtleData.shape].image.addEventListener('load', () => turtle.shape = turtleData.shape);
+				// Add the turtle to the page's dictionary of turtles.
 				this.pages[i].turtles[turtleName] = turtle;
 				window[turtleName] = turtle;
 			}
