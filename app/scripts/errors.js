@@ -1,4 +1,9 @@
 __env.err = {
+	showDeprecationWarning: function (oldFunc, newFunc) {
+		if (__editor.console) {
+			__editor.console.warn('You can use \u201c' + newFunc + '\u201d instead of \u201c' + oldFunc + '\u201d.');
+		}
+	},
 	throwDeprecationError: function (oldFunc, newFunc) {
 		throw new Error('Use \u201c' + newFunc + '\u201d instead of \u201c' + oldFunc + '\u201d.');
 	},

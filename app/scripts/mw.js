@@ -33,16 +33,38 @@ var MW = (function () {
 		
 		/**
 		 * @deprecated function from MicroWorlds Logo.
+		 * Reports true if all its inputs report true.
+		 * @example
+		 * show(and(t1.xCor === 0, t1.yCor === 0, t1.heading === 0))
+		 * true
 		 */
 		and: function () {
-			__env.err.throwDeprecationError('and(condition1, condition2)', 'condition1 && condition2');
+			__env.err.showDeprecationWarning('and(trueOrFalse1, trueOrFalse2)', 'trueOrFalse1 && trueOrFalse2');
+			
+			if (arguments.length < 2) {
+				__env.error.validateArgCount('and', arguments.length, 'multiple');
+			}
+			
+			var result = true;
+			
+			for (arg of arguments) {
+				result = (result && arg);
+			}
+			
+			return result;
 		},
 		
 		/**
 		 * @deprecated function from MicroWorlds Logo.
+		 * Displays a message in an alert box.  Clicking OK closes the box.
+		 * @param {String} message
+		 * @example
+		 * announce('You win!!');
 		 */
 		announce: function () {
-			__env.err.throwDeprecationError('announce(message)', 'alert(message)');
+			__env.err.showDeprecationWarning('announce(message)', 'alert(message)');
+			
+			return MW.alert.apply(MW, arguments);
 		},
 		
 		//
@@ -55,7 +77,7 @@ var MW = (function () {
 		 * @example
 		 * show(arctan(1));
 		 * 45
-		java */
+		 */
 		arctan: function (number) {
 			if (!__env.err.validateSingleNumber('arctan', arguments)) {
 				return;
@@ -281,9 +303,22 @@ var MW = (function () {
 		
 		/**
 		 * @deprecated function from MicroWorlds Logo.
+		 * Reports the number of components in the word or the list.
+		 * @param {Array|String} wordOrList
+		 * @example
+		 * show(count('hello'))
+		 * 5
+		 * show(count(['hello', 'there']))
+		 * 2
 		 */
-		count: function () {
-			__env.err.throwDeprecationError('count(wordOrList)', 'wordOrList.length');
+		count: function (wordOrList) {
+			__env.err.showDeprecationWarning('count(wordOrList)', 'wordOrList.length');
+			
+			if (typeof(wordOrList.length) === 'undefined') {
+				throw new TypeError(wordOrList + ' is not a word or list in count.');
+			}
+			
+			return wordOrList.length;
 		},
 		
 		//
