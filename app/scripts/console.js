@@ -27,6 +27,7 @@ __editor.console = {
 		// Get the user input field.
 		this._inputForm = document.getElementById('__consoleContent').getElementsByTagName('form')[0];
 		this._inputField = this._inputForm.getElementsByTagName('input')[0];
+		this._inputForm.addEventListener('submit', this.execute.bind(this));
 		
 		// Add event listeners for scrolling through past console inputs.
 		this._inputField.onkeydown = (ev) => {
@@ -49,15 +50,14 @@ __editor.console = {
 	
 	/**
 	 * Run the code typed into the console in the MiniWorldZ environment.
-	 * @param {HTMLFormElement} consoleForm - The form element in which the user typed the code
-	 * @param {Event} event - The form submit event
+	 * @param {Event} ev - The form submit event
 	 */
-	execute: function (consoleForm, event) {
-		event.preventDefault();
-		event.stopPropagation();
+	execute: function (ev) {
+		ev.preventDefault();
+		ev.stopPropagation();
 		
 		// Get the user input.
-		var input = consoleForm.__consoleInput.value;
+		var input = this._inputForm.__consoleInput.value;
 		
 		// Add the typed input to the console's hisotry.
 		this.addHistory(input);
@@ -67,7 +67,7 @@ __editor.console = {
 		__env.sandbox.runCode(input);
 		
 		// Clear the console input field.
-		consoleForm.__consoleInput.value = '';
+		this._inputForm.__consoleInput.value = '';
 	},
 	
 	/**
