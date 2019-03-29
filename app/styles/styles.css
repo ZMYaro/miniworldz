@@ -53,6 +53,9 @@ body {
 				#__consoleOutput p.error {
 					color: #ff5722;
 				}
+				#__consoleOutput p.warning {
+					color: #b27c18;
+				}
 				#__consoleOutput p.history {
 					color: #607d8b;
 				}

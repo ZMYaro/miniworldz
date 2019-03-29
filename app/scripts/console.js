@@ -99,6 +99,14 @@ __editor.console = {
 	},
 	
 	/**
+	 * Show a warning message in the console's output window.
+	 * @param {String} message - The warning message text
+	 */
+	warn: function (message) {
+		this._addMessage(message, 'warning');
+	},
+	
+	/**
 	 * Show an unstyled message in the console's output window.
 	 * @param {String} message - The message text
 	 */
