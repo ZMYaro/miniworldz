@@ -143,7 +143,7 @@ var __env = {
 			
 			// Add MW commands to scope.
 			for (var mwFunc in MW) {
-				eval('var ' + mwFunc + ' = function () { MW.' + mwFunc + '.apply(MW, arguments); };');
+				eval('var ' + mwFunc + ' = function () { return MW.' + mwFunc + '.apply(MW, arguments); };');
 			}
 			
 			try {
