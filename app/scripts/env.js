@@ -142,8 +142,8 @@ var __env = {
 				__editor = undefined;
 			
 			// Add MW commands to scope.
-			for (arguments in MW) {
-				eval('var ' + arguments + ' = function () { MW.' + arguments + '.apply(MW, arguments); };');
+			for (var mwFunc in MW) {
+				eval('var ' + mwFunc + ' = function () { MW.' + mwFunc + '.apply(MW, arguments); };');
 			}
 			
 			try {
