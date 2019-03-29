@@ -14,7 +14,7 @@ __editor.console = {
 		// Add the new console message to the console.
 		document.getElementById('__consoleOutput').appendChild(messagePara);
 		// Scroll the console to the bottom.
-		document.getElementById('__consoleOutput').scrollTop = Number.MAX_VALUE;
+		document.getElementById('__consoleOutput').scrollTop = Number.MAX_SAFE_INTEGER;
 	},
 	
 	/**
