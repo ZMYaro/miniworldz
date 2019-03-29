@@ -111,7 +111,7 @@ __editor.console = {
 	 * @param {String} message - The message text
 	 */
 	log: function (message) {
-		this._addMessage(message, false);
+		this._addMessage(message, 'output');
 	},
 	
 };
