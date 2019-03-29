@@ -1,5 +1,3 @@
-Math.TAU = Math.TAU || 2 * Math.PI;
-
 var __env = {
 	COLORS: [
 		"#FFFFFF", "#EFEFEF", "#E7E7E7", "#CECECE", "#BDBDBD", "#A5A5A5", "#848484", "#636363", "#393939", "#000000",
@@ -112,6 +110,9 @@ var __env = {
 		for (var turtleName in this.pages[this.currentPage].turtles) {
 			this.pages[this.currentPage].turtles[turtleName].__draw(this.turtleCtx);
 		}
+		
+		// Undo default anti-aliasing.
+		Utils.deAntiAlias(this.turtleCtx);
 		
 		requestAnimationFrame(this.boundUpdate);
 	},
