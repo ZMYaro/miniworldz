@@ -10,9 +10,7 @@ var MW = (function () {
 		 * 33
 		 */
 		abs: function (number) {
-			if (!__env.err.validateSingleNumber('abs', arguments)) {
-				return;
-			}
+			__env.err.validateSingleNumber('abs', arguments);
 			
 			return Math.abs(number);
 		},
@@ -24,9 +22,7 @@ var MW = (function () {
 		 * alert('You win!!');
 		 */
 		alert: function (message) {
-			if (!__env.err.validateArgCount('alert', arguments.length, 1)) {
-				return;
-			}
+			__env.err.validateArgCount('alert', arguments.length, 1);
 			
 			window.alert(message);
 		},
@@ -82,9 +78,7 @@ var MW = (function () {
 		 * 45
 		 */
 		arctan: function (number) {
-			if (!__env.err.validateSingleNumber('arctan', arguments)) {
-				return;
-			}
+			__env.err.validateSingleNumber('arctan', arguments);
 			
 			var radVal = Math.atan(number);
 			return radVal / Math.PI * 180;
@@ -95,13 +89,8 @@ var MW = (function () {
 		 * @param {String} character
 		 */
 		ascii: function (character) {
-			if (!__env.err.validateArgCount('ascii', arguments.length, 1)) {
-				return;
-			}
-			if (typeof character !== 'string') {
-				__env.err.throwTypeError('ascii', character);
-				return;
-			}
+			__env.err.validateArgCount('ascii', arguments.length, 1);
+			__env.err.validateType('ascii', character, 'string', 'character');
 			
 			return character.charCodeAt(0);
 		},
@@ -141,17 +130,15 @@ var MW = (function () {
 		 * elcome
 		 */
 		butFirst: function (stringOrList) {
-			if (!__env.err.validateArgCount('butFirst', arguments.length, 1)) {
-				return;
-			}
+			__env.err.validateArgCount('butFirst', arguments.length, 1);
+			
 			if (Array.isArray(stringOrList)) {
 				return stringOrList.slice(1);
-			} else if (typeof stringOrList !== 'string') {
+			} else if (typeof stringOrList === 'string') {
 				return stringOrList.substring(1);
-			} else {
-				__env.err.throwTypeError('butFirst', stringOrList);
-				return;
 			}
+			
+			throw new TypeError(stringOrList + ' is not text or a list in butFirst.');
 		},
 		
 		/**
@@ -164,17 +151,15 @@ var MW = (function () {
 		 * welcom
 		 */
 		butLast: function (stringOrList) {
-			if (!__env.err.validateArgCount('butLast', arguments.length, 1)) {
-				return;
-			}
+			__env.err.validateArgCount('butLast', arguments.length, 1);
+			
 			if (Array.isArray(stringOrList)) {
 				return stringOrList.slice(0, -1);
-			} else if (typeof stringOrList !== 'string') {
+			} else if (typeof stringOrList === 'string') {
 				return stringOrList.substring(0, stringOrList.length - 1);
-			} else {
-				__env.err.throwTypeError('butLast', stringOrList);
-				return;
 			}
+			
+			throw new TypeError(stringOrList + ' is not text or a list in butLast.');
 		},
 		
 		/**
@@ -186,6 +171,9 @@ var MW = (function () {
 		 * cancel(myFunc);
 		 */
 		cancel: function (func) {
+			__env.err.validateArgCount('cancel', arguments.length, 1);
+			__env.err.validateType('cancel', func, ['function', 'string'], 'function');
+			
 			__env.loops.forEach((loop, i) => {
 				if (loop.func.toString() == func.toString()) {
 					// Remove the function from the loop list.
@@ -202,7 +190,10 @@ var MW = (function () {
 		 * Stands for clear the command center.  Clears text in the command center.
 		 */
 		cc: function () {
-			if (!__env.err.validateArgCount('cc', arguments.length, 0)) {
+			__env.err.validateArgCount('cc', arguments.length, 0);
+			
+			if (!window.__editor) {
+				// If this is not being run in the editor, silently abort.
 				return;
 			}
 			window.__editor.console.clear();
@@ -213,9 +204,8 @@ var MW = (function () {
 		 * Stands for clear graphics.  Clears the graphics on the page and returns the current turtle to its home position, facing up.  See also {@link clean}.
 		 */
 		cg: function () {
-			if (!__env.err.validateArgCount('cg', arguments.length, 0)) {
-				return;
-			}
+			__env.err.validateArgCount('cg', arguments.length, 0);
+			
 			// TODO
 		},
 		
@@ -227,9 +217,7 @@ var MW = (function () {
 		 * a
 		 */
 		char: function (input) {
-			if (!__env.err.validateSingleNumber('char', arguments, 32, 255)) {
-				return;
-			}
+			__env.err.validateSingleNumber('char', arguments, 32, 255);
 			
 			return String.fromCharCode(input);
 		},
@@ -307,21 +295,21 @@ var MW = (function () {
 		/**
 		 * @deprecated function from MicroWorlds Logo.
 		 * Reports the number of components in the word or the list.
-		 * @param {Array|String} wordOrList
+		 * @param {Array|String} stringOrList
 		 * @example
 		 * show(count('hello'))
 		 * 5
 		 * show(count(['hello', 'there']))
 		 * 2
 		 */
-		count: function (wordOrList) {
-			__env.err.showDeprecationWarning('count(wordOrList)', 'wordOrList.length');
+		count: function (stringOrList) {
+			__env.err.showDeprecationWarning('count(stringOrList)', 'stringOrList.length');
 			
-			if (typeof(wordOrList.length) === 'undefined') {
-				throw new TypeError(wordOrList + ' is not a word or list in count.');
+			if (typeof(stringOrList.length) === 'undefined') {
+				throw new TypeError(stringOrList + ' is not text or a list in count.');
 			}
 			
-			return wordOrList.length;
+			return stringOrList.length;
 		},
 		
 		//

@@ -1,4 +1,17 @@
 __env.err = {
+	_formatForOutput: function (input) {
+		if (typeof(input) === 'string') {
+			return ('\'' + input + '\'');
+		} else if (Array.isArray(input)) {
+			var output = '[';
+			for (var i = 0; i < input.length; i++) {
+				input[i] = this._formatForOutput(input[i]);
+			}
+			return ('[' + input.join(', ') + ']');
+		}
+		return input;
+	},
+	
 	showDeprecationWarning: function (oldFunc, newFunc) {
 		if (__editor.console) {
 			__editor.console.warn('You can use \u201c' + newFunc + '\u201d instead of \u201c' + oldFunc + '\u201d.');
@@ -8,15 +21,22 @@ __env.err = {
 		throw new Error('Use \u201c' + newFunc + '\u201d instead of \u201c' + oldFunc + '\u201d.');
 	},
 	throwTypeError: function (func, input) {
-		throw new TypeError(func + ' does not like ' + input + ' as input');
+		input = this._formatForOutput(input);
+		throw new TypeError(func + ' does not like ' + input + ' as input.');
 	},
 	
-	throwMaxError: function (func) {
-		throw new RangeError('The maximum value for ' + func + ' is 9999');
+	throwMaxError: function (func, max) {
+		if (typeof(max) === 'undefined') {
+			max = 9999;
+		}
+		throw new RangeError('The maximum value for ' + func + ' is ' + max + '.');
 	},
 	
-	throwMinError: function (func) {
-		throw new RangeError('The minimum value for ' + func + ' is -9999');
+	throwMinError: function (func, min) {
+		if (typeof(min) === 'undefined') {
+			min = -9999;
+		}
+		throw new RangeError('The minimum value for ' + func + ' is ' + min + '.');
 	},
 	
 	clampValue: function (func, input, min, max) {
@@ -31,10 +51,10 @@ __env.err = {
 			max = 9999;
 		}
 		if (input < min) {
-			this.throwMinError(func);
+			this.throwMinError(func, min);
 			return false;
 		} else if (input > max) {
-			this.throwMaxError(func);
+			this.throwMaxError(func, max);
 			return false;
 		}
 		return true;
@@ -42,15 +62,24 @@ __env.err = {
 	
 	validateArgCount: function (func, received, expected) {
 		if (expected !== received) {
-			throw new Error(func + ' expected ' + expected + ' input' + (expected === 1 ? '' : 's') + ' but received ' + received);
+			throw new Error(func + ' expected ' + expected + ' input' + (expected === 1 ? '' : 's') + ' but received ' + received + '.');
 			return false;
 		}
 		return true;
 	},
 	
-	validateType: function (func, input, type, typeName) {
-		if (typeof(input) !== type) {
-			throw new TypeError(input + ' is not a ' + (typeName || type) + ' in ' + func + '.');
+	validateType: function (func, input, types, typeName) {
+		if (typeof(types) === 'string') {
+			types = [types];
+		}
+		if (types.indexOf(typeof(input)) === -1) {
+			if (typeof(typeName) === 'undefined') {
+				typeName =
+					(new Intl.ListFormat('en', { style: 'long', type: 'disjunction' }))
+					.format(types);
+			}
+			input = this._formatForOutput(input);
+			throw new TypeError(input + ' is not a ' + typeName + ' in ' + func + '.');
 			return false;
 		}
 		return true;
