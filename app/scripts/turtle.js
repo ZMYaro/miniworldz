@@ -98,6 +98,17 @@ var Turtle = (function () {
 		},
 		
 		/**
+		 * Reports the distance between the current turtle and the turtle indicated.  See also {@link towards}.
+		 * @param {Turtle|String} turtle - The other turtle or its name
+		 * @returns {Number} The distance to the other turtle
+		 * @example
+		 * t1.distance(t2)
+		 */
+		distance: function () {
+			// TODO
+		},
+		
+		/**
 		 * Shorthand for {@link forward}.
 		 * @param {Number} distance
 		 * @example

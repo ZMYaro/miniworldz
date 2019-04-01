@@ -53,6 +53,13 @@ var TextBox = (function () {
 		// TODO
 	};
 	
+	/**
+	 * Deletes the character to the right of the insertion point, in the current text box.
+	 */
+	TextBox.prototype.delete = function () {
+		// TODO
+	};
+	
 	Object.freeze(TextBox);
 	return TextBox;
 });

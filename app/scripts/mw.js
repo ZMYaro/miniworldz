@@ -34,6 +34,9 @@ var MW = (function () {
 		/**
 		 * @deprecated function from MicroWorlds Logo.
 		 * Reports true if all its inputs report true.
+		 * @param {Boolean} trueOrFalse1
+		 * @param {Boolean} trueOrFalse2
+		 * @returns {Boolean} Whether all the inputs are true
 		 * @example
 		 * show(and(t1.xCor === 0, t1.yCor === 0, t1.heading === 0))
 		 * true
@@ -236,7 +239,7 @@ var MW = (function () {
 		//
 		
 		/**
-		 * Clears the graphics without changing any turtle's position.  See also {@link cg} and {@link freezebg}.
+		 * Clears the graphics without changing any turtle's position.  See also {@link cg} and {@link freezeBg}.
 		 */
 		clean: function () {
 			if (!__env.err.validateArgCount('clean', arguments.length, 0)) {
@@ -325,7 +328,75 @@ var MW = (function () {
 		// TODO: cut
 		//
 		
+		//
+		// TODO: createProjectVar
+		//
 		
+		/**
+		 * @deprecated function from MicroWorlds Logo.
+		 * Reports the result of subtracting number2 from number1.
+		 * @param {Number} number1 - The number being subtracted from
+		 * @param {Number} number2 - The number being subtracted
+		 * @returns {Number} The difference of number1 - number2
+		 * @example
+		 * show(difference(7, 3))
+		 * 4
+		 */
+		difference: function (number1, number2) {
+			__env.err.showDeprecationWarning('difference(number1, number2)', 'number1 - number2');
+			
+			__env.err.validateArgCount('difference', arguments.length, 2);
+			__env.err.validateAllNumbers('difference', arguments);
+			
+			return (number1 - number2);
+		},
+		
+		/**
+		 * @deprecated un-camelcased function from MicroWorlds Logo.
+		 */
+		dolist: function () {
+			__env.err.throwDeprecationError('dolist(item, list, instructions)', 'list.forEach(instructions)');
+		},
+		
+		/**
+		 * @deprecated function from MicroWorlds Logo.
+		 */
+		doList: function () {
+			__env.err.throwDeprecationError('doList(item, list, instructions)', 'list.forEach(instructions)');
+		},
+		
+		//
+		// TODO: done
+		//
+		
+		/**
+		 * @deprecated un-camelcased function from MicroWorlds Logo.
+		 */
+		dotimes: function () {
+			__env.err.throwDeprecationError('dotimes(count, instructions)', 'doTimes(count, instructions)');
+		},
+		
+		/**
+		 * Runs the instruction list for each value specified in the range.
+		 * @param {Number} count - The number of times to run the instructions function
+		 * @param {Function} instructions - The instructions to run
+		 * @example
+		 * doTimes(5, (i) => show(i))
+		 * 0
+		 * 1
+		 * 2
+		 * 3
+		 * 4
+		 */
+		doTimes: function (count, instructions) {
+			__env.err.validateArgCount('doTimes', arguments.length, 2);
+			__env.err.validateType('doTimes', count, 'number');
+			__env.err.validateType('doTimes', instructions, 'function');
+			
+			for (var i = 0; i < count; i++) {
+				instructions(i);
+			}
+		},
 		
 		/**
 		 * Runs the function repeatedly.  Use {@link cancel} or the Stop All toolbar button to stop it.

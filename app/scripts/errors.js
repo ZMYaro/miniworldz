@@ -48,16 +48,29 @@ __env.err = {
 		return true;
 	},
 	
+	validateType: function (func, input, type, typeName) {
+		if (typeof(input) !== type) {
+			throw new TypeError(input + ' is not a ' + (typeName || type) + ' in ' + func + '.');
+			return false;
+		}
+		return true;
+	},
+	
 	validateSingleNumber: function (func, args, min, max) {
-		if (!this.validateArgCount(func, args.length, 1)) {
-			return false;
-		}
-		if (typeof args[0] !== 'number') {
-			this.throwTypeError(func, args[0]);
-			return false;
-		}
+		this.validateArgCount(func, args.length, 1);
+		this.validateType(func, args[0], 'number');
 		if (typeof min !== 'undefined' && typeof max !== 'undefined') {
-			return this.clampValue(func, args[0], min, max);
+			this.clampValue(func, args[0], min, max);
+		}
+		return true;
+	},
+	
+	validateAllNumbers: function (func, args, min, max) {
+		for (var arg of args) {
+			this.validateType(func, arg, 'number');
+			if (typeof min !== 'undefined' && typeof max !== 'undefined') {
+				this.clampValue(func, arg, min, max);
+			}
 		}
 		return true;
 	}
