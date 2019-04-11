@@ -72,19 +72,55 @@ var TextBox = (function () {
 	 */
 	Object.defineProperty(TextBox.prototype, 'eot', {
 		get: function () {
-			__enverr.throwDeprecationError('textBox.eot', 'textBox.isEot');
+			__env.err.throwDeprecationError('textBox.eot', 'textBox.isEot');
 		}
 	});
 	
 	/**
-	 * Stands for end of text.  Reports true if the cursor (insertion point), in the current text box, is at the end of the text.  See also {@link bottom}.
-	 * @returns {Boolean}
+	 * @deprecated function from MicroWorlds Logo.
+	 */
+	Object.defineProperty(TextBox.prototype, 'fontsize', {
+		get: function () {
+			__env.err.throwDeprecationError('textBox.fontsize', 'textBox.fontSize');
+		}
+	});
+	
+	/**
+	 * The font size used at the insertion point in the current text box.  If text that has more than one font size is selected, fontsize reports the first one.
+	 */
+	Object.defineProperty(TextBox.prototype, 'fontSize', {
+		get: function () {
+			// TODO
+		}
+	});
+	
+	/**
+	 * @deprecated question mark function from MicroWorlds Logo.
+	 */
+	Object.defineProperty(TextBox.prototype, 'found', {
+		get: function () {
+			__env.err.throwDeprecationError('textBox.found', 'textBox.wasFound');
+		}
+	});
+	
+	/**
+	 * {Boolean} Stands for end of text.  Reports true if the cursor (insertion point), in the current text box, is at the end of the text.  See also {@link bottom}.
 	 */
 	Object.defineProperty(TextBox.prototype, 'isEot', {
 		get: function () {
 			// TODO
 		}
 	});
+	
+	/**
+	 * {Boolean} Reports true if the last search instruction was successful
+	 */
+	Object.defineProperty(TextBox.prototype, 'wasFound', {
+		get: function () {
+			// TODO
+		}
+	});
+	
 	
 	
 	Object.freeze(TextBox);

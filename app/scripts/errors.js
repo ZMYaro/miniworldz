@@ -72,7 +72,8 @@ __env.err = {
 		if (typeof(types) === 'string') {
 			types = [types];
 		}
-		if (types.indexOf(typeof(input)) === -1) {
+		if (types.indexOf(typeof(input)) === -1 &&
+				!(types.indexOf('array') !== -1 && Array.isArray(input))) {
 			if (typeof(typeName) === 'undefined') {
 				typeName =
 					(new Intl.ListFormat('en', { style: 'long', type: 'disjunction' }))

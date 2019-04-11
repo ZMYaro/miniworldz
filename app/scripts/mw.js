@@ -436,6 +436,27 @@ var MW = (function () {
 		},
 		
 		/**
+		 * Reports the first component of the word or list.  See also {@link butFirst}, {@link butLast}, and {@link last}.
+		 * @param {Array|String} stringOrList
+		 * @example
+		 * show(first('hello'));
+		 * h
+		 * show(first(['one', 'two']));
+		 * one
+		 */
+		first: function (stringOrList) {
+			__env.err.validateArgCount('first', arguments.length, 1);
+			
+			if (Array.isArray(stringOrList)) {
+				return stringOrList[0];
+			} else if (typeof(stringOrList) === 'string') {
+				return stringOrList.charAt(0);
+			}
+			
+			throw new TypeError(stringOrList + ' is not text or a list in first.');
+		},
+		
+		/**
 		 * Runs the function repeatedly.  Use {@link cancel} or the Stop All toolbar button to stop it.
 		 * @param {Function} func
 		 * @example
@@ -447,6 +468,28 @@ var MW = (function () {
 				times: -1
 			});
 		},
+		
+		/**
+		 * Stands for first put.  Reports the list created by adding the first input at the beginning of the second input.  The second input has to be a list.  See also {@link lput}.
+		 * @param {Array|String} stringOrListToAdd
+		 * @param {Array} list
+		 */
+		fput: function (stringOrListToAdd, list) {
+			__env.err.validateArgCount('fput', arguments.length, 2);
+			
+			__env.err.validateType('fput', list, 'array', 'list');
+			
+			list.unshift(stringOrListToAdd);
+			return list;
+		},
+		
+		//
+		// TODO: freeze
+		//
+		
+		//
+		// TODO: freezeBg
+		//
 		
 		/**
 		 * Reports true if the input is an empty word or empty list.

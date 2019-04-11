@@ -122,6 +122,10 @@ var Turtle = (function () {
 			this.forward(distance);
 		},
 		
+		fill: function () {
+			// TODO
+		},
+		
 		/**
 		 * Move the turtle forward.
 		 * @param {Number} distance
