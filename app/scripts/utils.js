@@ -1,7 +1,16 @@
 'use strict';
 
 // Polyfills.
-Math.TAU = Math.TAU || 2 * Math.PI;
+Math.TAU = Math.TAU || (2 * Math.PI);
+Object.values = Object.values || function (obj) {
+	var vals = [];
+	for (var key in obj) {
+		if (obj.hasOwnProperty(obj[key]) && obj.propertyIsEnumerable(obj[key])) {
+			vals.push(obj[key]);
+		}
+	}
+	return vals;
+};
 
 var Utils = {
 	/**

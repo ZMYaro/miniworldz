@@ -134,7 +134,7 @@ var MW = (function () {
 			
 			if (Array.isArray(stringOrList)) {
 				return stringOrList.slice(1);
-			} else if (typeof stringOrList === 'string') {
+			} else if (typeof(stringOrList) === 'string') {
 				return stringOrList.substring(1);
 			}
 			
@@ -155,7 +155,7 @@ var MW = (function () {
 			
 			if (Array.isArray(stringOrList)) {
 				return stringOrList.slice(0, -1);
-			} else if (typeof stringOrList === 'string') {
+			} else if (typeof(stringOrList) === 'string') {
 				return stringOrList.substring(0, stringOrList.length - 1);
 			}
 			
@@ -387,6 +387,55 @@ var MW = (function () {
 		},
 		
 		/**
+		 * @deprecated question mark function from MicroWorlds Logo.
+		 */
+		empty: function () {
+			__env.err.throwDeprecationError('empty(stringOrList)', 'isEmpty(stringOrList)');
+		},
+		
+		/**
+		 * @deprecated question mark function from MicroWorlds Logo.
+		 */
+		equal: function () {
+			__env.err.throwDeprecationError('equal(stringOrList)', 'isEqual(stringOrList)');
+		},
+		
+		/**
+		 * @deprecated un-camelcased function from MicroWorlds Logo.
+		 */
+		errormessage: function () {
+			__env.err.throwDeprecationError('errormessage', 'try { ... } catch (errorMessage) { ... }');
+		},
+		
+		/**
+		 * @deprecated function from MicroWorlds Logo.
+		 */
+		errorMessage: function () {
+			__env.err.throwDeprecationError('errorMessage', 'try { ... } catch (errorMessage) { ... }');
+		},
+		
+		/**
+		 * Makes all the turtles on the current page run the instructions, one after the other.
+		 * @param {Function} instructions - The instructions to run, taking a turtle as an input
+		 * @example
+		 * everyone((turtle) => turtle.clickOn())
+		 */
+		everyone: function (instructions) {
+			for (var turtle of Object.values(__env.pages[__env.currentPage].turtles)) {
+				instructions(turtle);
+			}
+		},
+		
+		/**
+		 * Stands for exponential. Reports the constant e to the power of the number (e^n).
+		 * @param {Number} number
+		 * @returns {Number} e to the number's power.
+		 */
+		exp: function (number) {
+			return Math.exp(number);
+		},
+		
+		/**
 		 * Runs the function repeatedly.  Use {@link cancel} or the Stop All toolbar button to stop it.
 		 * @param {Function} func
 		 * @example
@@ -400,6 +449,51 @@ var MW = (function () {
 		},
 		
 		/**
+		 * Reports true if the input is an empty word or empty list.
+		 * @param {Array|String} stringOrList
+		 * @returns {Boolean} Whether the input has a length of 0
+		 * @example
+		 * show(isEmpty('hello'))
+		 * false
+		 * show(isEmpty([]))
+		 * true
+		 */
+		isEmpty: function (stringOrList) {
+			__env.err.validateArgCount('isEmpty', arguments.length, 1);
+			
+			if (typeof(stringOrList.length) !== 'undefined') {
+				return stringOrList.length === 0;
+			}
+			
+			throw new TypeError(stringOrList + ' is not text or a list in butLast.');
+		},
+		
+		/**
+		 * Reports true if the two inputs are equal. The inputs may be words, numbers, or lists.
+		 * @param {Object} input1
+		 * @param {Object} input2
+		 * @returns {Boolean} Whether the inputs are abstractly equal
+		 * @example
+		 * show(isEqual('a', 'A'))
+		 * true
+		 * show(isEqual(5, 7))
+		 * false
+		 * show(isEqual(5, '5'))
+		 * true
+		 */
+		isEqual: function (input1, input2) {
+			__env.err.showDeprecationWarning('isEqual(input1, input2)', 'input1 == input2');
+			
+			__env.err.validateArgCount('isEqual', arguments.length, 2);
+			
+			if (typeof(input1) === 'string' && typeof(input2)) {
+				return (input1.toLowerCase() == input2.toLowerCase());
+			}
+			
+			return (input1 == input2);
+		},
+		
+		/**
 		 * Prints a word or list in the command center.
 		 * @param {String} stringOrList
 		 * @example
@@ -409,7 +503,7 @@ var MW = (function () {
 		 * 1,2,3
 		 */
 		show: function (stringOrList, isError) {
-			if ((!isError || typeof isError !== 'boolean') && !__env.err.validateArgCount('show', arguments.length, 1)) {
+			if ((!isError || typeof(isError) !== 'boolean') && !__env.err.validateArgCount('show', arguments.length, 1)) {
 				return;
 			}
 			if (!isError) {
